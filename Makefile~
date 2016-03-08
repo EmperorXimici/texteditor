@@ -1,0 +1,16 @@
+asmsources := $(shell find ./ -name '*.s')
+csources := $(shell find ./ -name '*.c')
+
+asmobjects := $(asmsources:.s=.o)
+cobjects := $(csources:.c=.o)
+
+all : $(asmobjects) $(cobjects)
+
+clean :
+	rm -f $(asmobjects) $(cobjects)
+
+$(cobjects) : %.o : %.c
+	gcc -o $@ -c $<
+
+$(asmobjects) : %.o : %.s
+	gcc -o $@ -c $<
