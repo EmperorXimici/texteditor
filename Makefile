@@ -6,7 +6,7 @@ CC=gcc
 CFLAGS= -g -c -Wall -O0
 LDLIBS=
 PNAME=cEdit
-OBJECTS=core.o main.o
+OBJECTS=devmode.o core.o main.o
 
 # These variables will hold the diffrent compile modes
 RELEASE= -c -O3
@@ -16,6 +16,10 @@ all: build
 
 build: $(OBJECTS)
 	$(CC) $(OBJECTS) $(LDLIBS) -o $(PNAME)
+
+
+devmode.o: devmode.c
+	$(CC) $(CFLAGS) devmode.c
 
 core.o: core.c
 	$(CC) $(CFLAGS) core.c

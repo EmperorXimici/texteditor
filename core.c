@@ -11,6 +11,7 @@
 #include<stdlib.h>
 #include<string.h>
 #include "core.h"
+#include "devmode.h"
 
 void StartEditor()
 {
@@ -86,61 +87,6 @@ int GetInput(doc *fileBuffer)
     return 0;
 }
 
-//This function processes the dev Commands
-void GoInDevMode(doc *fileBuffer, char *command)
-{
-    int param = GetParameter(command);
-    RemoveEnter(command);
-
-    if(strcmp(command, "save") == SAME_STRING)
-    {
-        SaveDocument(fileBuffer);
-    }
-    else if(strcmp(command, "print") == SAME_STRING)
-    {
-        PrintDoc(fileBuffer);
-    }
-    else if(strcmp(command, "movey") == SAME_STRING)
-    {
-        MoveCursorY(fileBuffer, param);
-    }
-    else if(strcmp(command, "exit") == SAME_STRING)
-    {
-        ExitProgram();
-    }
-}
-
-//This function prints out the text in our document
-void PrintDoc(const doc *fileBuffer)
-{
-    //Print name of file
-    printf("%s\n", fileBuffer->name);
-
-    //Print out the document itself
-    node* listIterator = fileBuffer->HEAD;
-    while(listIterator != NULL)
-    {
-        printf("%s", listIterator->content);
-        listIterator = listIterator->next;
-    }
-}
-
-//Move the CURRENT pointer
-int MoveCursorY(doc *fileBuffer, int y)
-{
-    node* listIterator = fileBuffer->HEAD;
-    for(int i = 0; listIterator != NULL; i++)
-    {
-        if(i == y)
-        {
-            fileBuffer->CURRENT = listIterator;
-            return 0;
-        }
-        listIterator = listIterator->next;
-    }
-    return 1;
-}
-
 //This function reads the file into the system
 doc* ReadDocument(const char *filename)
 {
@@ -178,43 +124,8 @@ doc* NewDocument()
     return newDoc;
 }
 
-//This function will save a document based on the name in the doc struct
-int SaveDocument(const doc* fileBuffer)
-{
-    //Ope the file to write to
-    FILE *saveFile = fopen(fileBuffer->name, "w");
-    rewind(saveFile);
 
-    //Write the data into the file
-    node* listIterator = fileBuffer->HEAD;
-    for(int i = 0; listIterator != NULL; i++)
-    {
-        fputs(listIterator->content, saveFile);
-        listIterator->isEdited = FALSE;
-        listIterator = listIterator->next;
-    }
-
-    fclose(saveFile);
-
-    return 0;
-}
-
-//This function exits the program
-int ExitProgram()
-{
-    //TODO: Free document
-    exit(0);
-
-    return 0;
-}
-
-//This function removes end-line enters
-void RemoveEnter(char*string)
-{
-    int len = strlen(string);
-    string[len-1] = '\0';
-}
-
+/*
 //This function returns the parameter and removes it from the command
 int GetParameter(char* command)
 {
@@ -225,3 +136,4 @@ int GetParameter(char* command)
     }
     return 0;
 }
+*/

@@ -81,17 +81,6 @@ int ReadIn(doc *fileBuffer, const char *s);
 */
 int GetInput(doc *fileBuffer);
 
-
-/** \brief This function prints out the text in our document
-
-    TODO: add detailed description of the function
-
-    @param const struct doc: The document we want to print out.
-    @return void.
-*/
-void PrintDoc(const doc *fileBuffer);
-
-
 /** \brief This function reads the file into the system
 
     TODO: add detailed description of the function
@@ -101,29 +90,10 @@ void PrintDoc(const doc *fileBuffer);
 */
 doc* ReadDocument(const char *filename);
 
-
-int SaveDocument(const doc* fileBuffer);
-
-
 void StartEditor();
-
-
-int MoveCursorY(doc *fileBuffer, int y);
-
 
 doc* NewDocument();
 
-
-void GoInDevMode(doc *fileBuffer, char *command);
-
-
-int ExitProgram();
-
-
-void RemoveEnter(char* string);
-
-
-int GetParameter(char* command);
 
 
 #endif
